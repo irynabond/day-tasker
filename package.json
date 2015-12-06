@@ -1,0 +1,27 @@
+{
+  "name": "day-tasker",
+  "version": "1.0.0",
+  "description": "List of tasks for every day",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irynabond/day-tasker.git"
+  },
+  "keywords": [
+    "task"
+  ],
+  "author": "Iryna Bondarenko, Maksym Bondarenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irynabond/day-tasker/issues"
+  },
+  "homepage": "https://github.com/irynabond/day-tasker#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.2.9"
+  }
+}
