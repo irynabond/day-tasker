@@ -6,7 +6,7 @@ function buildTask(task, $placeholder) {
 	var $edit = $("<button>Edit</button>");
 	var $delete = $("<button>Delete</button>");
 	$done.prop('checked', task.done);
-	$text.text(task.text);
+	$text.text(task.task);
 	$edit.click(function(){
 		var id = $(this).parent().attr('data-task-id');
 		var newText = prompt("Enter new task text");
@@ -39,11 +39,11 @@ function buildTasks(tasks, $placeholder) {
 function addTask(tasks, text, $tasksPlaceholder) {
 	$.ajax({
 		type: 'POST',
-		data: text,
+		data: JSON.stringify({task: text}),
 		contentType: "application/json; charset=utf-8",
 		url: window.location.origin + '/add',
 		success: function(id){
-			var task = {id: id, text: text, checked: false};
+			var task = {id: id, task: text, done: false};
 			buildTask(task, $tasksPlaceholder);
 		},
 	});
@@ -56,8 +56,7 @@ $(function(){
 			var $addButton = $('<button>Add task</button>');
 			var $tasksPlaceholder = buildTasks(tasks);
 			$addButton.click(function(){
-				var task = addTask(tasks, prompt("Enter new task"));
-				buildTask(task, $tasksPlaceholder);
+				addTask(tasks, prompt("Enter new task"), $tasksPlaceholder);
 			});
 			$('#tasks').append($addButton);
 			$('#tasks').append($tasksPlaceholder);
