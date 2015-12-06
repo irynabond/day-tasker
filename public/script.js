@@ -1,5 +1,4 @@
-var taskId = 1;
-
+/* global $ */
 function buildTask(task, $placeholder) {
 	var $taskPlaceholder = $("<div></div>");
 	var $done = $("<input type='checkbox'></input>");
@@ -37,20 +36,31 @@ function buildTasks(tasks, $placeholder) {
 
 
 
-function addTask(tasks, text) {
-	var task = {id: taskId++, text: text, checked: false};
-	tasks.push(task);
-	return task;
+function addTask(tasks, text, $tasksPlaceholder) {
+	$.ajax({
+		type: 'POST',
+		data: text,
+		contentType: "application/json; charset=utf-8",
+		url: window.location.origin + '/add',
+		success: function(id){
+			var task = {id: id, text: text, checked: false};
+			buildTask(task, $tasksPlaceholder);
+		},
+	});
 };
 
 $(function(){
-		var someTasks = [{id: taskId++, text: 'Task', done: false}, {id: taskId++, text: 'Some', done: true}];
-		var $addButton = $('<button>Add button</button>');
-		var $tasksPlaceholder = buildTasks(someTasks);
-		$addButton.click(function(){
-			var task = addTask(someTasks, prompt("Enter new task"));
-			buildTask(task, $tasksPlaceholder);
-		});
-		$('#tasks').append($addButton);
-		$('#tasks').append($tasksPlaceholder);
+	$.ajax({
+		url: window.location.origin + '/data',
+		success: function(tasks) {
+			var $addButton = $('<button>Add task</button>');
+			var $tasksPlaceholder = buildTasks(tasks);
+			$addButton.click(function(){
+				var task = addTask(tasks, prompt("Enter new task"));
+				buildTask(task, $tasksPlaceholder);
+			});
+			$('#tasks').append($addButton);
+			$('#tasks').append($tasksPlaceholder);
+		}
+	});
 });

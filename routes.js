@@ -6,7 +6,7 @@ var handleError = require(__dirname + '/lib/handleServerError');
 var taskRouter = module.exports = exports = express.Router();
 
 taskRouter.get('/', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html')
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 taskRouter.get('/data', function(req, res) {
