@@ -1,15 +1,11 @@
-'use strict';
-
-var express = require('express');
 var mongoose = require('mongoose');
+var express = require('express');
 var app = express();
-app.use(express.static(__dirname));
+var taskRouter = require(__dirname + '/routes');
 
-var routes = express.Router();
-mongoose.connect(process.env.MONGOLAB_URL || 'mongodb://localhost/tasker');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/task');
 
-//require('./routes')(routes);
-app.use(routes);
+app.use(taskRouter);
 
 app.listen((process.env.PORT || 3000), function() {
   console.log('Server has started on port ' + (process.env.PORT || 3000));
