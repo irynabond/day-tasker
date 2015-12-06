@@ -5,6 +5,7 @@ function buildTask(task, $placeholder) {
 	var $done = $("<input type='checkbox'></input>");
 	var $text = $("<span class = 'taskText'></span>");
 	var $edit = $("<button>Edit</button>");
+	var $delete = $("<button>Delete</button>");
 	$done.prop('checked', task.done);
 	$text.text(task.text);
 	$edit.click(function(){
@@ -14,7 +15,10 @@ function buildTask(task, $placeholder) {
 			$(this).parent().find(".taskText").text(newText);	
 		}
 	});
-	$taskPlaceholder.append($done).append($text).append($edit);
+	$delete.click(function(){
+		$(this).parent().remove();
+	});
+	$taskPlaceholder.append($done).append($text).append($edit).append($delete);
 	$taskPlaceholder.attr('data-task-id', task.id);
 	$placeholder.append($taskPlaceholder);
 };
