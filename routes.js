@@ -24,7 +24,6 @@ taskRouter.post('/add', bodyParser.json(), function(req, res) {
 
 taskRouter.put('/edit/:id', bodyParser.json(), function(req, res) {
   var taskData = req.body;
-  delete taskData._id;
   Task.update({_id: req.params.id}, taskData, function(err) {
     if (err) return handleError(err, res);
     res.json({msg: 'Task has been edited!'});

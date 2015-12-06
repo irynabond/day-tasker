@@ -44,11 +44,11 @@ function addTask(tasks, text) {
 };
 
 $(function(){
-		var someTasks = [{id: taskId++, text: 'Task', done: false}, {id: taskId++, text: 'Some', done: true}];
-		var $addButton = $('<button>Add button</button>');
-		var $tasksPlaceholder = buildTasks(someTasks);
+		//var someTasks = [{id: taskId++, text: 'Task', done: false}, {id: taskId++, text: 'Some', done: true}];
+		var $addButton = $('<button>Add task</button>');
+		var $tasksPlaceholder = buildTasks(tasks);
 		$addButton.click(function(){
-			var task = addTask(someTasks, prompt("Enter new task"));
+			var task = addTask(tasks, prompt("Enter new task"));
 			buildTask(task, $tasksPlaceholder);
 		});
 		$('#tasks').append($addButton);
