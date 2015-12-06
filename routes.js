@@ -17,7 +17,7 @@ taskRouter.get('/data', function(req, res) {
 });
 
 taskRouter.post('/add', bodyParser.json(), function(req, res) {
-  var newTask = new Task(req.body);
+  var newTask = new Task({task: req.body});
   newTask.save(function(err, data) {
     if (err) return handleError(err, res);
     res.json(data._id);
