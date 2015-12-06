@@ -3,11 +3,18 @@ var taskId = 1;
 function buildTask(task, $placeholder) {
 	var $taskPlaceholder = $("<div></div>");
 	var $done = $("<input type='checkbox'></input>");
-	var $text = $("<span></span>");
+	var $text = $("<span class = 'taskText'></span>");
+	var $edit = $("<button>Edit</button>");
 	$done.prop('checked', task.done);
 	$text.text(task.text);
-	
-	$taskPlaceholder.append($done).append($text);
+	$edit.click(function(){
+		var id = $(this).parent().attr('data-task-id');
+		var newText = prompt("Enter new task text");
+		if(newText) {
+			$(this).parent().find(".taskText").text(newText);	
+		}
+	});
+	$taskPlaceholder.append($done).append($text).append($edit);
 	$taskPlaceholder.attr('data-task-id', task.id);
 	$placeholder.append($taskPlaceholder);
 };
